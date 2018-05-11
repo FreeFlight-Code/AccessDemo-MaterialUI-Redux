@@ -1,3 +1,20 @@
 .avatar {
     width: 50px;
 }
+
+#leftside {
+    display: inline-block;
+    padding: 30px;
+    height: 100vh;
+    /* width: 30vw; */
+    max-width: 500px;
+    background-color: rgba(163, 252, 151, 0.582);
+    position: relative;
+    top: -100px;
+}
+
+#rightside {
+    display: inline-block;
+    width: calc(100vw - 30vw);
+
+}

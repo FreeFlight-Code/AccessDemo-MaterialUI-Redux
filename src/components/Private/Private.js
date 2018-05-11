@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+import AppBar from './AppBar';
 import './Private.css'
-// import axios from 'axios';
+import Subheader from 'material-ui/Subheader';
+import TextField from 'material-ui/TextField';
+import Table from './Table';
+
 import { connect } from 'react-redux';
 import { getUserInfo } from './../../ducks/user';
 
 class Private extends Component {
-    
+
     componentDidMount() {
         this.props.getUserInfo();
     }
@@ -14,27 +18,27 @@ class Private extends Component {
 
         return (
             <div>
-                Hello darkness my old friend
-            </div> 
+                < AppBar />
+                <div id='leftside'>
+                    <Subheader>Filters</Subheader>
+                    <TextField
+                        id="companyName"
+                        hintText="Company"
+                        floatingLabelText="Company Name"
+                    /><br />
+                    <TextField
+                        id="estimatorName"
+                        hintText="Estimator"
+                        floatingLabelText="Estimator Name"
+                    /><br />
+                </div>
+                <div id='rightside'>
+                    < Table />
+                </div>
+            </div>
         )
     }
 }
-//     render() {
-//         console.log(this.props)
-//         return (
-//             <div className=''>
-//                 <h1>Community Bank</h1><hr />
-//                 <h4>Account information:</h4>
-//                 { this.props.user ? <img className='avatar' alt='avatar' src={this.props.user.img} /> : null }
-//                 <p>Username: { this.props.user ? this.props.user.user_name : null }</p>
-//                 <p>Email: { this.props.user ? this.props.user.email : null }</p>
-//                 <p>ID: { this.props.user ? this.props.user.auth_id : null }</p>
-//                 <h4>Available balance: { this.props.user ? '$' + Math.floor((Math.random() + 1) * 100) + '.00' : null } </h4>
-//                 <a href='http://localhost:3005/auth/logout'><button>Log out</button></a>
-//             </div> 
-//         )
-//     }
-// }
 
 function mapStateToProps(state) {
     return {
@@ -42,4 +46,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect( mapStateToProps, { getUserInfo })(Private);
+export default connect(mapStateToProps, { getUserInfo })(Private);
