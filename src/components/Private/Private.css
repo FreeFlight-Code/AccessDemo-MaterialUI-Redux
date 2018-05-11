@@ -1,7 +1,10 @@
 .avatar {
     width: 50px;
 }
-
+#mainpage{
+    width: 100%;
+    display: flex;
+}
 #leftside {
     display: inline-block;
     padding: 30px;
@@ -10,11 +13,11 @@
     max-width: 500px;
     background-color: rgba(163, 252, 151, 0.582);
     position: relative;
-    top: -100px;
+    /* top: -100px; */
 }
 
 #rightside {
     display: inline-block;
-    width: calc(100vw - 30vw);
+    /* width: calc(100vw - 30vw); */
 
 }

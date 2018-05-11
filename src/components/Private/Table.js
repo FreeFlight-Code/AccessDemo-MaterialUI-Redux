@@ -9,10 +9,22 @@ import {
 } from 'material-ui/Table';
 
 
+const json = require('./data.json');
 class TableClass extends Component {
     render() {
-        
+        const dataMapping = () => {
+            return (json.map((e, i, a)=>{
+                return (
+                    <TableRow>
+                        <TableRowColumn key={'company_column' + i}>{e.company}</TableRowColumn>
+                        <TableRowColumn key={'estimate_column' + i}>{e.estimate_amount}</TableRowColumn>
+                        <TableRowColumn key={'estimator_column' + i}>{e.estimator}</TableRowColumn>
+                        <TableRowColumn key={'date_column' + i}>{e.date}</TableRowColumn>
+                    </TableRow>
+                )
+            }))
 
+        }
 
 
         return (
@@ -20,16 +32,13 @@ class TableClass extends Component {
                 <TableHeader>
                     <TableRow>
                         <TableHeaderColumn>Company Name</TableHeaderColumn>
-                        <TableHeaderColumn>Estimator</TableHeaderColumn>
                         <TableHeaderColumn>Bid</TableHeaderColumn>
+                        <TableHeaderColumn>Estimator</TableHeaderColumn>
+                        <TableHeaderColumn>Date</TableHeaderColumn>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    <TableRow>
-                        <TableRowColumn>1</TableRowColumn>
-                        <TableRowColumn>John Smith</TableRowColumn>
-                        <TableRowColumn>Employed</TableRowColumn>
-                    </TableRow>
+                    {dataMapping()}
                 </TableBody>
 
             </Table>

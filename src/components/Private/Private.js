@@ -19,6 +19,7 @@ class Private extends Component {
         return (
             <div>
                 < AppBar />
+                <div id='mainpage'>
                 <div id='leftside'>
                     <Subheader>Filters</Subheader>
                     <TextField
@@ -34,6 +35,7 @@ class Private extends Component {
                 </div>
                 <div id='rightside'>
                     < Table />
+                </div>
                 </div>
             </div>
         )
