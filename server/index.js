@@ -63,6 +63,14 @@ passport.use(new Auth0Strategy({
 
 }));
 
+const api = require('./api.js');
+
+// endpoint queries
+
+app.get('/api/getData', api.getData);
+
+
+
 app.get('/auth', passport.authenticate('auth0'));
 
 app.get('/auth/callback', passport.authenticate('auth0', {
@@ -90,6 +98,9 @@ app.get('/auth/me', (req, res, next) => {
     return res.status(200).send(req.user);
   }
 })
+
+
+
 
 app.get('/auth/logout', (req, res) => {
   req.logOut();

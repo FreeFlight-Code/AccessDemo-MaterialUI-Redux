@@ -1,9 +1,7 @@
 import axios from 'axios';
 
 // Set up initial state
-const initialState = {
-    user: {}
-};
+const initialState = {};
 
 // action types
 const GET_USER_INFO = 'GET_USER_INFO';
@@ -21,11 +19,14 @@ export function getUserInfo() {
 
 // reducer function
 export default function reducer(state = initialState, action) {
+    let newState = Object.assign({}, ...state);
     switch (action.type) {
         case GET_USER_INFO + '_FULFILLED':
-            return Object.assign({}, state, action.payload );
+        newState = action.payload;
+            break;
         default:
             return state;
     }
+    return newState
 
 }
