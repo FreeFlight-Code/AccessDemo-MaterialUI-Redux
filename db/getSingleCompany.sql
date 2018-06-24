@@ -1,0 +1,1 @@
+select * from Companies where id = $1;

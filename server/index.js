@@ -9,6 +9,8 @@ const express = require('express')
 
 const app = express();
 
+app.use(bodyParser.json())
+
 app.use(session({
   secret: process.env.SECRET,
   resave: false,
@@ -36,7 +38,45 @@ passport.use(new Auth0Strategy({
   clientSecret: process.env.AUTH_CLIENT_SECRET,
   callbackURL: process.env.AUTH_CALLBACK
 }, function(accessToken, refreshToken, extraParams, profile, done) {
-  // console.log(accessToken, 'accesstoken', profile, 'profile line 42')
+  //Sample profile
+  // Profile {
+  //   provider: 'auth0',
+  //   displayName: 'test@test.com',
+  //   id: 'auth0|5a79edb9ebf64a46ecdd5340',
+  //   user_id: 'auth0|5a79edb9ebf64a46ecdd5340',
+  //   name: { familyName: undefined, givenName: undefined },
+  //   emails: [ { value: 'test@test.com' } ],
+  //   picture: 'https://s.gravatar.com/avatar/b642b4217b34b1e8d3bd915fc65c4452?s=48
+  // 0&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fte.png',
+  //   nickname: 'test',
+  //   identities:
+  //    [ { user_id: '5a79edb9ebf64a46ecdd5340',
+  //        provider: 'auth0',
+  //        connection: 'Username-Password-Authentication',
+  //        isSocial: false } ],
+  //   _json:
+  //    { email_verified: false,
+  //      email: 'test@test.com',
+  //      clientID: '1EbbBT8aVxRSUEuYeGxPn3VdAu1eJm7J',
+  //      updated_at: '2018-06-24T03:14:20.799Z',
+  //      name: 'test@test.com',
+  //      picture: 'https://s.gravatar.com/avatar/b642b4217b34b1e8d3bd915fc65c4452?s
+  // =480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fte.png',
+  //      user_id: 'auth0|5a79edb9ebf64a46ecdd5340',
+  //      nickname: 'test',
+  //      identities: [ [Object] ],
+  //      created_at: '2018-02-06T18:02:33.322Z',
+  //      sub: 'auth0|5a79edb9ebf64a46ecdd5340' },
+  //   _raw: '{"email_verified":false,"email":"test@test.com","clientID":"1EbbBT8aVx
+  // RSUEuYeGxPn3VdAu1eJm7J","updated_at":"2018-06-24T03:14:20.799Z","name":"test@te
+  // st.com","picture":"https://s.gravatar.com/avatar/b642b4217b34b1e8d3bd915fc65c44
+  // 52?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fte.png","user_id":"auth
+  // 0|5a79edb9ebf64a46ecdd5340","nickname":"test","identities":[{"user_id":"5a79edb
+  // 9ebf64a46ecdd5340","provider":"auth0","connection":"Username-Password-Authentic
+  // ation","isSocial":false}],"created_at":"2018-02-06T18:02:33.322Z","sub":"auth0|
+  // 5a79edb9ebf64a46ecdd5340"}' } 
+
+  console.log(accessToken, 'accesstoken', profile, 'profile line 39')
 
   const db = app.get('db');
 
@@ -45,14 +85,14 @@ passport.use(new Auth0Strategy({
 
   db.find_user([ profile.identities[0].user_id ])
   .then( user => {
-    // console.log(user, '47 user')
+    // console.log(user, '48 user')
    if ( user[0] ) {
 
      return done( null, { id: user[0].id } );
 
    } else {
 
-     db.create_user([profile.displayName, profile.emails[0].value, profile.picture, profile.identities[0].user_id])
+     db.addContact([profile.displayName, profile.emails[0].value, profile.picture, profile.identities[0].user_id])
      .then( user => {
         return done( null, { id: user[0].id } );
      })
@@ -68,6 +108,18 @@ const api = require('./api.js');
 // endpoint queries
 
 app.get('/api/getData', api.getData);
+
+app.get('/api/getUsers', api.getPersons);
+app.get('/api/getUser/:id', api.getSingleUser);
+app.post('/api/addUser', api.addUser);
+app.post('/api/editUser/:id', api.editUser);
+app.delete('/api/deleteUser/:id', api.deleteUser);
+
+app.get('/api/getCompanies', api.getCompanies);
+app.get('/api/getCompany/:id', api.getSingleCompany);
+
+app.get('/api/getJobs', api.getJobs);
+app.get('/api/getJob/:id', api.getSingleJob);
 
 
 
