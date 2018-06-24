@@ -30,6 +30,18 @@ massive({
 })
 .then( db => {
   app.set('db', db);
+
+  db.getCompanies()
+    .then(data=>{
+      if (data.length>0) { 
+        console.log('database contains data...')
+      }
+    })
+    .catch(err=>{
+      console.log('database created and populated with sample data....');
+      db.create_tables().catch(err=>console.log(err));
+      db.create_sample_db().catch(err=>console.log(err));
+    });
 })
 
 passport.use(new Auth0Strategy({
@@ -78,16 +90,10 @@ passport.use(new Auth0Strategy({
 
   const db = app.get('db');
 
-  // db.create_tables;
-  // db.create_sample_db;
-
   db.find_user([ profile.identities[0].user_id ])
   .then( user => {
-    // console.log(user, '48 user')
    if ( user[0] ) {
-
      return done( null, { id: user[0].id } );
-
    } else {
 
      db.addContact([profile.displayName, profile.emails[0].value, profile.picture, profile.identities[0].user_id])
