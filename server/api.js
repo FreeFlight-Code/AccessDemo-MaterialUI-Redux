@@ -110,6 +110,34 @@ module.exports = {
         })
         .catch(err=>res.status(404).send(err))
     },
+    editJob: function (req, res, next){
+        let db = req.app.get('db');
+        let id = req.params.id;
+        let {
+            estimator_id,
+            date,
+            estimate_amount,
+            company_id,
+            city
+        } = req.body;
+        db.editJob([
+            id,
+            estimator_id,
+            date,
+            estimate_amount,
+            company_id,
+            city
+        ]).then(data=>{
+            res.status(200).send(true)
+        })
+    },
+    deleteJob: function (req, res, next){
+        let db = req.app.get('db');
+        let id = req.params.id;
+        db.deleteJob(id).then(data=>{
+            res.status(200).send(true)
+        })
+    },
     getCompanies: function (req, res, next){
         let db = req.app.get('db')
         db.getCompanies().then(data=>{
@@ -146,5 +174,35 @@ module.exports = {
             res.status(200).send('company created with id ' + data[0].id);
         })
         .catch(err=>res.status(404).send(err))
+    },
+    editCompany: function (req, res, next){
+        let db = req.app.get('db');
+        let id = req.params.id;
+        let {
+            name,
+            phone,
+            address,
+            url,
+            logo,
+            contact_id
+        } = req.body;
+        db.editCompany([
+            id,
+            name,
+            phone,
+            address,
+            url,
+            logo,
+            contact_id
+        ]).then(data=>{
+            res.status(200).send(true)
+        })
+    },
+    deleteCompany: function (req, res, next){
+        let db = req.app.get('db');
+        let id = req.params.id;
+        db.deleteCompany(id).then(data=>{
+            res.status(200).send(true)
+        })
     },
 }

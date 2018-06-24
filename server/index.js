@@ -110,20 +110,20 @@ app.get('/api/getData', api.getData);
 app.get('/api/getUsers', api.getPersons);
 app.get('/api/getUser/:id', api.getSingleUser);
 app.post('/api/addUser', api.addUser);
-app.post('/api/editUser/:id', api.editUser);
+app.put('/api/editUser/:id', api.editUser);
 app.delete('/api/deleteUser/:id', api.deleteUser);
 
 app.get('/api/getCompanies', api.getCompanies);
 app.get('/api/getCompany/:id', api.getSingleCompany);
 app.post('/api/addCompany', api.addCompany);
-// app.post('/api/editCompany/:id', api.editCompany);
-// app.delete('/api/deleteCompany/:id', api.deleteCompany);
+app.put('/api/editCompany/:id', api.editCompany);
+app.delete('/api/deleteCompany/:id', api.deleteCompany);
 
 app.get('/api/getJobs', api.getJobs);
 app.get('/api/getJob/:id', api.getSingleJob);
 app.post('/api/addJob', api.addJob);
-// app.post('/api/editJob/:id', api.editJob);
-// app.delete('/api/deleteJob/:id', api.deleteJob);
+app.put('/api/editJob/:id', api.editJob);
+app.delete('/api/deleteJob/:id', api.deleteJob);
 
 
 app.get('/auth', passport.authenticate('auth0'));
