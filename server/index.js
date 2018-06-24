@@ -76,8 +76,6 @@ passport.use(new Auth0Strategy({
   // ation","isSocial":false}],"created_at":"2018-02-06T18:02:33.322Z","sub":"auth0|
   // 5a79edb9ebf64a46ecdd5340"}' } 
 
-  console.log(accessToken, 'accesstoken', profile, 'profile line 39')
-
   const db = app.get('db');
 
   // db.create_tables;
@@ -117,10 +115,15 @@ app.delete('/api/deleteUser/:id', api.deleteUser);
 
 app.get('/api/getCompanies', api.getCompanies);
 app.get('/api/getCompany/:id', api.getSingleCompany);
+app.post('/api/addCompany', api.addCompany);
+// app.post('/api/editCompany/:id', api.editCompany);
+// app.delete('/api/deleteCompany/:id', api.deleteCompany);
 
 app.get('/api/getJobs', api.getJobs);
 app.get('/api/getJob/:id', api.getSingleJob);
-
+app.post('/api/addJob', api.addJob);
+// app.post('/api/editJob/:id', api.editJob);
+// app.delete('/api/deleteJob/:id', api.deleteJob);
 
 
 app.get('/auth', passport.authenticate('auth0'));

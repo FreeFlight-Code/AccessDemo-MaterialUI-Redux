@@ -47,7 +47,7 @@ module.exports = {
         }
         else {
             db.addContact([user_name, email, phone, img, auth_id]).then(data=>{
-                res.status(200).send('contact created')
+                res.status(200).send('contact created with id ' + data[0].id)
             })
             .catch(err=>console.log(err))
         }
@@ -88,6 +88,28 @@ module.exports = {
             res.status(200).send(data)
         })
     },
+    addJob: function (req, res, next){
+        let db = req.app.get('db');
+        let {
+            estimator_id,
+            date,
+            estimate_amount,
+            company_id,
+            city
+        } = req.body;
+        db.addJob([
+            estimator_id,
+            date,
+            estimate_amount,
+            company_id,
+            city
+        ])
+        .then(data=>{
+            console.log('job created');
+            res.status(200).send('job created with id ' + data[0].id);
+        })
+        .catch(err=>res.status(404).send(err))
+    },
     getCompanies: function (req, res, next){
         let db = req.app.get('db')
         db.getCompanies().then(data=>{
@@ -100,5 +122,29 @@ module.exports = {
         db.getSingleCompany(id).then(data=>{
             res.status(200).send(data)
         })
+    },
+    addCompany: function (req, res, next){
+        let db = req.app.get('db');
+        let {
+            name,
+            phone,
+            address,
+            url,
+            logo,
+            contact_id
+        } = req.body;
+        db.addCompany([
+            name,
+            phone,
+            address,
+            url,
+            logo,
+            contact_id
+        ])
+        .then(data=>{
+            console.log('company created');
+            res.status(200).send('company created with id ' + data[0].id);
+        })
+        .catch(err=>res.status(404).send(err))
     },
 }
