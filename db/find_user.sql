@@ -1,3 +1,3 @@
 SELECT * 
 FROM persons
-WHERE persons.auth_id = $1;
+WHERE persons.id = $1;

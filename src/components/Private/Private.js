@@ -13,7 +13,7 @@ import {
     TableRowColumn,
 } from 'material-ui/Table';
 import { connect } from 'react-redux';
-import { getUserInfo } from './../../ducks/user';
+import { getUserInfo } from './../../ducks/people';
 import { getData } from './../../ducks/data';
 
 
@@ -57,7 +57,8 @@ class Private extends Component {
         let stateValueChange = e.target.value;
         let newResults = this.state.name.length > 0 || this.state.user_name.length > 0 ? this.state.sorted : this.props.data;
         let filterItems = newResults.filter((el, i, a)=> {
-            if(el && el[stateTargetKey] && el[stateTargetKey].includes(stateValueChange))  return (el)
+            if(el && el[stateTargetKey] && el[stateTargetKey].includes(stateValueChange))  return (el);
+            else return null;
         })
         this.setState({
             [stateTargetKey]: stateValueChange,

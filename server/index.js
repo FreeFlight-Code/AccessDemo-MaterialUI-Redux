@@ -90,19 +90,20 @@ passport.use(new Auth0Strategy({
 
   const db = app.get('db');
 
-  db.find_user([ profile.identities[0].user_id ])
+  db.find_user([ profile.identities[0].id ])
   .then( user => {
    if ( user[0] ) {
      return done( null, { id: user[0].id } );
    } else {
-
-     db.addContact([profile.displayName, profile.emails[0].value, profile.picture, profile.identities[0].user_id])
+      //db.addContact uses these values to add to db (user_name, email, img, auth_id)
+      console.log(profile)
+     db.addContact([profile.displayName, profile.emails[0].value, profile.picture, profile.identities[0].id])
      .then( user => {
         return done( null, { id: user[0].id } );
-     })
+     }).catch(err=>console.log(err))
 
    }
-  })
+  }).catch(err=>console.log(err))
 
 
 }));
