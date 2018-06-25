@@ -136,7 +136,7 @@ app.delete('/api/deleteJob/:id', api.deleteJob);
 app.get('/auth', passport.authenticate('auth0'));
 
 app.get('/auth/callback', passport.authenticate('auth0', {
-  successRedirect: 'http://localhost:3000/private',
+  successRedirect: 'http://localhost:3000/app',
   failureRedirect: 'http://localhost:3000/'
 }))
 
