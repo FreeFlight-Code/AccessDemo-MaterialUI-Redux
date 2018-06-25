@@ -136,8 +136,8 @@ app.delete('/api/deleteJob/:id', api.deleteJob);
 app.get('/auth', passport.authenticate('auth0'));
 
 app.get('/auth/callback', passport.authenticate('auth0', {
-  successRedirect: 'http://localhost:3000/#/private',
-  failureRedirect: 'http://localhost:3000/#/'
+  successRedirect: 'http://localhost:3000/private',
+  failureRedirect: 'http://localhost:3000/'
 }))
 
 passport.serializeUser(function(user, done) {
@@ -166,7 +166,7 @@ app.get('/auth/me', (req, res, next) => {
 
 app.get('/auth/logout', (req, res) => {
   req.logOut();
-  return res.redirect(302, 'http://localhost:3000/#/');
+  return res.redirect(302, 'http://localhost:3000/');
 })
 
 let PORT = 3005;

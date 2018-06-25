@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AppBar from './AppBar';
-import './Private.css'
+import '../../styles/Admin.css'
 import Subheader from 'material-ui/Subheader';
 import TextField from 'material-ui/TextField';
 // import Table from './Table';

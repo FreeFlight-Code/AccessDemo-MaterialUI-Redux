@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Login from './components/Login/Login';
-import Private from './components/Private/Private';
+import Application from './components/Private/Application';
+import './styles/App.css';
 
 
 class App extends Component {
@@ -17,7 +18,7 @@ class App extends Component {
       <BrowserRouter>
         <div>
           <Route component={ Login } path='/' exact />
-          <Route component={ Private } path='/private' />
+          <Route component={ Application } path='/app' />
         </div> 
       </BrowserRouter>  
     );
