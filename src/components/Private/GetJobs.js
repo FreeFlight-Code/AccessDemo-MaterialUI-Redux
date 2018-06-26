@@ -9,11 +9,15 @@ class GetJobs extends Component {
         //hard coded 2 but need a method to see whos logged in
         this.props.getMyJobs(2);
     }
+    showModal(id){
+        this.props.history.push(`/app/details/${id}`)
+    }
     render() {
+        console.log(this.props)
         const jobRender = this.props.jobs.length>0 ? this.props.jobs.map((el, i, a)=>{
-            console.log(el)
+            // console.log(el)
             return (
-                <div className='jobLine' key={`jobLine${i}`} >
+                <div onClick={_=>this.showModal(el.id)} className='jobLine' key={`jobLine${i}`} >
                     <span key={`jobLine_id_${i}`}>{el.id}</span>
                     <span key={`jobLine_name_${i}`}>{el.name}</span>
                     <span key={`jobLine_estimate_${i}`}>{el.estimate_amount}</span>

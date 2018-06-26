@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Login from './components/Login/Login';
 import Application from './components/Private/Application';
+import JobDetails from './components/Private/JobDetails';
 import './styles/App.css';
 
 
@@ -14,11 +15,13 @@ class App extends Component {
     }
   }
   render() {
+
     return (
-      <BrowserRouter>
+      <BrowserRouter history={ this.props.history }>
         <div>
           <Route component={ Login } path='/' exact />
           <Route component={ Application } path='/app' />
+          <Route component={ JobDetails } path='/app/details' />
         </div> 
       </BrowserRouter>  
     );

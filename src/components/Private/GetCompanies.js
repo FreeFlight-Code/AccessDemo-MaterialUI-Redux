@@ -9,15 +9,12 @@ class GetCompanies extends Component {
         this.props.getAllCompanies();
     }
     render() {
-        console.log(this.props)
         const companyRender = this.props.companies.length>0 ? this.props.companies.map((el, i, a)=>{
-            console.log(el)
             return (
                 <div className='companyLine' key={`companyLine${i}`} >
                     <span key={`companyLine_id_${i}`}>{el.id}</span>
                     {/* <span key={`companyLine_logo_${i}`}>{el.logo}</span> */}
                     <span key={`companyLine_name_${i}`}>{el.name}</span>
-                
                 </div>
             )
         }) : "no companies" 
