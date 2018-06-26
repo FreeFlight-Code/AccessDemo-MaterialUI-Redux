@@ -127,6 +127,7 @@ app.put('/api/editCompany/:id', api.editCompany);
 app.delete('/api/deleteCompany/:id', api.deleteCompany);
 
 app.get('/api/getJobs', api.getJobs);
+app.get('/api/getMyJobs/:id', api.getMyJobs);
 app.get('/api/getJob/:id', api.getSingleJob);
 app.post('/api/addJob', api.addJob);
 app.put('/api/editJob/:id', api.editJob);

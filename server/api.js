@@ -80,6 +80,13 @@ module.exports = {
             res.status(200).send(data)
         })
     },
+    getMyJobs: function (req, res, next){
+        let db = req.app.get('db');
+        let id = req.params.id;
+        db.getMyJobs(id).then(data=>{
+            res.status(200).send(data)
+        })
+    },
     getSingleJob: function (req, res, next){
         console.log(req)
         let db = req.app.get('db');

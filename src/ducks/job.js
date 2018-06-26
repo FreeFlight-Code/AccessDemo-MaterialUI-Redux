@@ -5,6 +5,7 @@ const initialState = [];
 
 // action types
 const GET_JOBS = 'GET_JOBS';
+const GET_MY_JOBS = 'GET_MY_JOBS';
 
 
 // action creators
@@ -17,6 +18,15 @@ export function getJobs() {
         payload: data
     }
 }
+export function getMyJobs(id) {
+    const data = axios.get('/api/getMyJobs/' + id).then( res => {
+        return res.data
+    })
+    return {
+        type: GET_MY_JOBS,
+        payload: data
+    }
+}
 
 // reducer function
 export default function reducer(state = initialState, action) {
@@ -24,6 +34,9 @@ export default function reducer(state = initialState, action) {
     switch (action.type) {
 
         case GET_JOBS + '_FULFILLED':
+        newState = action.payload.slice();
+        break;
+        case GET_MY_JOBS + '_FULFILLED':
         newState = action.payload.slice();
         break;
 

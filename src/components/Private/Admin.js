@@ -16,7 +16,7 @@ import { connect } from 'react-redux';
 import { getUserInfo } from './../../ducks/people';
 import { getData } from './../../ducks/data';
 
-
+//
 // const json = require('./data.json');
 
 // var results;

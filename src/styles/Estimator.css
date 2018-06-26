@@ -1,0 +1,24 @@
+#header{
+    height: 10vh;
+    width: 100vw;
+    background-color: blue;
+    color: white;
+}
+#menu{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 10vh;
+    width: 100vw;
+    background-color: rgb(64, 64, 247);
+
+}
+.icon{
+    height: 6vh;
+    width: 6vh;
+    background-color: rgb(155, 154, 240);
+    color: rgb(29, 29, 29);
+    text-align: center;
+    font-size: .7em;
+    padding: 5px;
+}

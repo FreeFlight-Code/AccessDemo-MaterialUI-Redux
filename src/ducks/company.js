@@ -4,12 +4,22 @@ import axios from 'axios';
 const initialState = [];
 
 // action types
+const GET_ALL_COMPANIES = 'GET_ALL_COMPANIES';
 const GET_COMPANY = 'GET_COMPANY';
 const ADD_COMPANY = 'ADD_COMPANY';
 const EDIT_COMPANY = 'EDIT_COMPANY';
 const DELETE_COMPANY = 'DELETE_COMPANY';
 
 // action creators
+export function getAllCompanies() {
+    const data = axios.get(`/api/getCompanies`).then( res => {
+        return res.data
+    }).catch(err=>console.log(err))
+    return {
+        type: GET_ALL_COMPANIES,
+        payload: data
+    }
+}
 export function getCompany(index) {
     const data = axios.get(`/api/getCompany/${index}`).then( res => {
         return res.data
@@ -69,6 +79,9 @@ export default function reducer(state = initialState, action) {
     let newState = Object.assign([], ...state);
     if (action.payload === null) return state;
     switch (action.type) {
+        case GET_ALL_COMPANIES + '_FULFILLED':
+        newState = action.payload;
+        break;
         case GET_COMPANY + '_FULFILLED':
         newState = action.payload.splice();
         break;
