@@ -14,10 +14,10 @@ import {
 } from 'material-ui/Table';
 import { connect } from 'react-redux';
 import { getUserInfo } from './../../ducks/people';
-import { getData } from './../../ducks/data';
+import { getJobs } from './../../ducks/job';
 
 //
-// const json = require('./data.json');
+// const json = require('./Jobs.json');
 
 // var results;
 
@@ -39,14 +39,14 @@ class Private extends Component {
 
     componentWillMount() {
         this.props.getUserInfo();
-        this.props.getData();
+        this.props.getJobs();
     }
 
     componentDidMount() {
-        if (this.props.data.length > 0) {
-            let results = this.props.data;
+        if (this.props.jobs.length > 0) {
+            let results = this.props.jobs;
             this.setState({
-                data: results,
+                jobs: results,
                 sorted: results
             })
         }
@@ -55,7 +55,7 @@ class Private extends Component {
     onFilterChange = (e) => {
         let stateTargetKey = e.target.id;
         let stateValueChange = e.target.value;
-        let newResults = this.state.name.length > 0 || this.state.user_name.length > 0 ? this.state.sorted : this.props.data;
+        let newResults = this.state.name.length > 0 || this.state.user_name.length > 0 ? this.state.sorted : this.props.jobs;
         let filterItems = newResults.filter((el, i, a)=> {
             if(el && el[stateTargetKey] && el[stateTargetKey].includes(stateValueChange))  return (el);
             else return null;
@@ -68,9 +68,9 @@ class Private extends Component {
     }
 
     render() {
-        // console.log(this.props.data)
+        // console.log(this.props.jobs)
         // console.log(this.state.sorted, 'sorted')
-        var sortedData = this.state.sorted.length > 0 ? this.state.sorted : this.props.data;
+        var sortedData = this.state.sorted.length > 0 ? this.state.sorted : this.props.jobs;
         const dataMapping = () => {
 
             if (sortedData) {
@@ -138,13 +138,13 @@ function mapStateToProps(state) {
     // console.log(state, 'store on private')
     return {
         user: state.user,
-        data: state.data
+        jobs: state.job
     }
 }
 const mapDispatchToProps = {
 
     getUserInfo,
-    getData
+    getJobs
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Private);

@@ -21,7 +21,7 @@ class App extends Component {
         <div>
           <Route component={ Login } path='/' exact />
           <Route component={ Application } path='/app' />
-          <Route component={ JobDetails } path='/app/details' />
+          <Route component={ JobDetails } path='/details' />
         </div> 
       </BrowserRouter>  
     );

@@ -9,6 +9,7 @@
     border: 3px outset rgba(156, 156, 156, 0.404);
     padding: 8px 0;
     border-radius: 8px;
+    font-size: .6rem;
 }
 .companyLine:hover, .jobLine:hover{
     background-color: rgb(210, 210, 255);
@@ -16,4 +17,7 @@
 }
 .companyLine span, .jobLine span{
     margin: 0 10px;
+}
+a{
+    text-decoration: none;
 }
